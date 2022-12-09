@@ -11,7 +11,7 @@ export default function App() {
 				style={styles.rootScreen}
 				imageStyle={styles.backgrounImage}
 			>
-				<StartGameScreen />
+				<SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
 			</ImageBackground>
 		</LinearGradient>
 	)
