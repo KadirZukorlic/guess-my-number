@@ -21,7 +21,12 @@ const generateRandomBetween = (
 let minNumber: number = 1
 let maxNumber: number = 100
 
-function GameScreen({ userNumber }: { userNumber: number }) {
+interface Props {
+	userNumber: number
+	onGameOver: () => void
+}
+
+function GameScreen({ userNumber }: Props) {
 	const initialGuess = generateRandomBetween(minNumber, maxNumber, userNumber)
 	const [currentGuess, setCurrentGuess] = useState<number>(initialGuess)
 
