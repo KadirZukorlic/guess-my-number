@@ -3,7 +3,7 @@ import Colors from '../../constants/colors'
 
 interface Props {
 	children: React.ReactNode
-	style?: TextStyle 
+	style?: TextStyle
 }
 
 function InstructionText({ children, style }: Props) {
@@ -14,6 +14,7 @@ export default InstructionText
 
 const styles = StyleSheet.create({
 	instructionText: {
+		fontFamily: 'open-sans',
 		color: Colors.accent500,
 		fontSize: 24
 	}
