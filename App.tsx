@@ -3,6 +3,7 @@ import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import StartGameScreen from './screens/StartGameScreen'
 import GameScreen from './screens/GameScreen'
+import GameOverScreen from './screens/GameOver'
 import Colors from './constants/colors'
 
 export default function App() {
@@ -20,7 +21,12 @@ export default function App() {
 		<StartGameScreen onPickNumber={pickedNumberHandler} />
 	)
 
-	if (userNumber) screen = <GameScreen userNumber={userNumber} />
+	if (userNumber)
+		screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+
+	if (isGameOver && userNumber) {
+		screen = <GameOverScreen />
+	}
 
 	return (
 		<LinearGradient
