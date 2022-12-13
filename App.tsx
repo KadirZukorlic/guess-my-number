@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import { useFonts } from 'expo-font'
-import AppLoading from 'expo-app-loading'
 import StartGameScreen from './screens/StartGameScreen'
 import GameScreen from './screens/GameScreen'
 import GameOverScreen from './screens/GameOver'
@@ -17,9 +16,7 @@ export default function App() {
 		'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
 	})
 
-	if (!fontsLoaded) {
-		return <AppLoading />
-	}
+	if (!fontsLoaded) return null
 
 	const pickedNumberHandler = (pickedNumber: number) => {
 		setUserNumber(pickedNumber)
