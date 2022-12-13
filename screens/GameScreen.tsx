@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import Title from '../components/ui/Title'
 import NumberContainer from '../components/game/NumberContainer'
 import PrimaryButton from '../components/ui/PrimaryButton'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
 const generateRandomBetween = (
 	min: number,
@@ -64,10 +65,10 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 				<Text>Higher or lower?</Text>
 				<View>
 					<PrimaryButton onPress={() => nextGuessHandler('lower')}>
-						-
+							<Ionicons name="md-remove" size={24} color={Colors.white} />
 					</PrimaryButton>
 					<PrimaryButton onPress={() => nextGuessHandler('higher')}>
-						+
+							<Ionicons name="md-add" size={24} color={Colors.white} />
 					</PrimaryButton>
 				</View>
 			</View>
