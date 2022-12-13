@@ -7,10 +7,14 @@ import Colors from './constants/colors'
 
 export default function App() {
 	const [userNumber, setUserNumber] = useState<number | null>(null)
+	const [isGameOver, setIsGameOver] = useState<boolean>(true)
 
 	const pickedNumberHandler = (pickedNumber: number) => {
 		setUserNumber(pickedNumber)
+		setIsGameOver(false)
 	}
+
+	const gameOverHandler = () => setIsGameOver(true)
 
 	let screen: JSX.Element = (
 		<StartGameScreen onPickNumber={pickedNumberHandler} />
