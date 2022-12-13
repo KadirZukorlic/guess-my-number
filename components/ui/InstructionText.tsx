@@ -1,8 +1,13 @@
-import { Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet, TextStyle } from 'react-native'
 import Colors from '../../constants/colors'
 
-function InstructionText({ children }: { children: React.ReactNode }) {
-	return <Text style={styles.instructionText}>{children}</Text>
+interface Props {
+	children: React.ReactNode
+	style?: TextStyle 
+}
+
+function InstructionText({ children, style }: Props) {
+	return <Text style={[styles.instructionText, style]}>{children}</Text>
 }
 
 export default InstructionText
