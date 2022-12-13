@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Alert } from 'react-native'
 import Title from '../components/ui/Title'
 import NumberContainer from '../components/game/NumberContainer'
@@ -26,9 +26,15 @@ interface Props {
 	onGameOver: () => void
 }
 
-function GameScreen({ userNumber }: Props) {
-	const initialGuess = generateRandomBetween(minNumber, maxNumber, userNumber)
+function GameScreen({ userNumber, onGameOver }: Props) {
+	const initialGuess = generateRandomBetween(1, 100, userNumber)
 	const [currentGuess, setCurrentGuess] = useState<number>(initialGuess)
+
+	useEffect(() => {
+		if (currentGuess === userNumber) {
+			onGameOver()
+		}
+	}, [currentGuess, userNumber, onGameOver])
 
 	const nextGuessHandler = (direction: 'lower' | 'higher'): void => {
 		if (
@@ -48,8 +54,6 @@ function GameScreen({ userNumber }: Props) {
 		}
 		const newRndNum = generateRandomBetween(minNumber, maxNumber, currentGuess)
 		setCurrentGuess(newRndNum)
-		if (newRndNum == userNumber)
-		Alert.alert('You won in ')
 	}
 
 	return (
