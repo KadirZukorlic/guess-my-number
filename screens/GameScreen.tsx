@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { View, StyleSheet, Alert } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import Ionicons from '@expo/vector-icons/Ionicons'
 import Title from '../components/ui/Title'
 import NumberContainer from '../components/game/NumberContainer'
 import PrimaryButton from '../components/ui/PrimaryButton'
@@ -68,8 +68,8 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 				<InstructionText style={styles.instructionText}>
 					Higher or lower?
 				</InstructionText>
-				<View style={styles.buttonContainer}>
-					<View style={styles.buttonsContainer}>
+				<View style={styles.buttonsContainer}>
+					<View style={styles.buttonContainer}>
 						<PrimaryButton onPress={() => nextGuessHandler('lower')}>
 							<Ionicons name="md-remove" size={24} color={Colors.white} />
 						</PrimaryButton>
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 24
 	},
 	instructionText: {
-		marginBottom: 12
+		marginBottom: 12,
 	},
 	buttonsContainer: {
 		flexDirection: 'row'
