@@ -10,6 +10,7 @@ import Colors from './constants/colors'
 export default function App() {
 	const [userNumber, setUserNumber] = useState<number | null>(null)
 	const [isGameOver, setIsGameOver] = useState<boolean>(true)
+	const [guessRoundNumber, setGuessRoundsNumber] = useState<number>(0)
 
 	const [fontsLoaded] = useFonts({
 		'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
@@ -23,6 +24,11 @@ export default function App() {
 		setIsGameOver(false)
 	}
 
+	const startNewGameHandler = () => {
+		setUserNumber(null)
+		setGuessRoundsNumber(0)
+	}
+
 	const gameOverHandler = () => setIsGameOver(true)
 
 	let screen: JSX.Element = (
@@ -30,10 +36,21 @@ export default function App() {
 	)
 
 	if (userNumber)
-		screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+		screen = (
+			<GameScreen
+				userNumber={userNumber}
+				onGameOver={gameOverHandler}
+			/>
+		)
 
 	if (isGameOver && userNumber) {
-		screen = <GameOverScreen />
+		screen = (
+			<GameOverScreen
+				userNumber={userNumber}
+				roundsNumber={guessRoundNumber}
+				onStartNewGame={startNewGameHandler}
+			/>
+		)
 	}
 
 	return (

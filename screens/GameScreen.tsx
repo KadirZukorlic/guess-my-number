@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { View, StyleSheet, Alert } from 'react-native'
+import { View, StyleSheet, Alert, FlatList, Text } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
 import Title from '../components/ui/Title'
 import NumberContainer from '../components/game/NumberContainer'
@@ -33,12 +33,18 @@ interface Props {
 function GameScreen({ userNumber, onGameOver }: Props) {
 	const initialGuess = generateRandomBetween(1, 100, userNumber)
 	const [currentGuess, setCurrentGuess] = useState<number>(initialGuess)
+	const [guessRounds, setGuessRounds] = useState<number[]>([initialGuess])
 
 	useEffect(() => {
 		if (currentGuess === userNumber) {
 			onGameOver()
 		}
 	}, [currentGuess, userNumber, onGameOver])
+
+	useEffect(() => {
+		minNumber = 1
+		maxNumber = 100
+	}, [])
 
 	const nextGuessHandler = (direction: 'lower' | 'higher'): void => {
 		if (
@@ -58,6 +64,7 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 		}
 		const newRndNum = generateRandomBetween(minNumber, maxNumber, currentGuess)
 		setCurrentGuess(newRndNum)
+		setGuessRounds((prevState) => [newRndNum, ...prevState])
 	}
 
 	return (
@@ -81,7 +88,17 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 					</View>
 				</View>
 			</Card>
-			{/* <View>LOG ROUNDS</View> */}
+			<View>
+				{/* FlatList better, even tho this list wouldn't get to long, FlatList lazy loads list items, only when they are needed to be rendered */}
+				{/* {guessRounds.map((guessRound) => (
+					<Text key={guessRound}>{guessRound}</Text>
+				))} */}
+				<FlatList
+					data={guessRounds}
+					renderItem={(itemData) => <Text>{itemData.item}</Text>}
+					keyExtractor={(item: any) => item}
+				/>
+			</View>
 		</View>
 	)
 }
@@ -97,7 +114,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 24
 	},
 	instructionText: {
-		marginBottom: 12,
+		marginBottom: 12
 	},
 	buttonsContainer: {
 		flexDirection: 'row'
