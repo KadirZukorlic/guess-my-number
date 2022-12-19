@@ -7,6 +7,7 @@ import PrimaryButton from '../components/ui/PrimaryButton'
 import Card from '../components/ui/Card'
 import InstructionText from '../components/ui/InstructionText'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
+import GuessLogItem from '../components/game/GuessLogItem'
 
 const generateRandomBetween = (
 	min: number,
@@ -68,6 +69,7 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 	}
 
 	const guessRoundsListLenght = guessRounds.length
+
 	return (
 		<View style={styles.screen}>
 			<Title>Opponent's guess</Title>
@@ -89,7 +91,7 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 					</View>
 				</View>
 			</Card>
-			<View>
+			<View style={styles.listContainer}>
 				{/* FlatList better, even tho this list wouldn't get to long, FlatList lazy loads list items, only when they are needed to be rendered */}
 				{/* {guessRounds.map((guessRound) => (
 					<Text key={guessRound}>{guessRound}</Text>
@@ -127,5 +129,9 @@ const styles = StyleSheet.create({
 	},
 	buttonContainer: {
 		flex: 1
+	},
+	listContainer: {
+		flex: 1,
+		padding: 16
 	}
 })
