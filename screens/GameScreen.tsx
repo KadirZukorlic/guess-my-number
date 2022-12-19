@@ -27,7 +27,7 @@ let maxNumber: number = 100
 
 interface Props {
 	userNumber: number
-	onGameOver: () => void
+	onGameOver: (numberOfRounds: number) => void
 }
 
 function GameScreen({ userNumber, onGameOver }: Props) {
@@ -37,7 +37,7 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 
 	useEffect(() => {
 		if (currentGuess === userNumber) {
-			onGameOver()
+			onGameOver(guessRounds.length)
 		}
 	}, [currentGuess, userNumber, onGameOver])
 
@@ -67,6 +67,7 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 		setGuessRounds((prevState) => [newRndNum, ...prevState])
 	}
 
+	const guessRoundsListLenght = guessRounds.length
 	return (
 		<View style={styles.screen}>
 			<Title>Opponent's guess</Title>
@@ -95,7 +96,12 @@ function GameScreen({ userNumber, onGameOver }: Props) {
 				))} */}
 				<FlatList
 					data={guessRounds}
-					renderItem={(itemData) => <Text>{itemData.item}</Text>}
+					renderItem={(itemData) => (
+						<GuessLogItem
+							roundNumber={guessRoundsListLenght - itemData.index}
+							guess={itemData.item}
+						/>
+					)}
 					keyExtractor={(item: any) => item}
 				/>
 			</View>

@@ -29,19 +29,17 @@ export default function App() {
 		setGuessRoundsNumber(0)
 	}
 
-	const gameOverHandler = () => setIsGameOver(true)
+	const gameOverHandler = (numberOfRounds: number) => {
+		setIsGameOver(true)
+		setGuessRoundsNumber(numberOfRounds)
+	}
 
 	let screen: JSX.Element = (
 		<StartGameScreen onPickNumber={pickedNumberHandler} />
 	)
 
 	if (userNumber)
-		screen = (
-			<GameScreen
-				userNumber={userNumber}
-				onGameOver={gameOverHandler}
-			/>
-		)
+		screen = <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
 
 	if (isGameOver && userNumber) {
 		screen = (
